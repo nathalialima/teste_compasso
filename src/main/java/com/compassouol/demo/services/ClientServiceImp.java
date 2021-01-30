@@ -4,6 +4,7 @@ import com.compassouol.demo.dtos.ClientDto;
 import com.compassouol.demo.entities.City;
 import com.compassouol.demo.entities.Client;
 import com.compassouol.demo.exceptions.CityNotFoundException;
+import com.compassouol.demo.exceptions.ClientException;
 import com.compassouol.demo.exceptions.ClientNotFoundException;
 import com.compassouol.demo.repositories.ClientRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,11 +21,16 @@ public class ClientServiceImp implements  ClientService{
     private final CityService cityService;
 
     @Override
-    public Client create(ClientDto clientDto) throws CityNotFoundException {
+    public Client create(ClientDto clientDto) throws CityNotFoundException, ClientException {
         City city =  cityService.findById(clientDto.getCityId());
-        Client client = clientDto.parserToEntity();
-        client.setCity(city);
-        return clientRepository.save(client);
+        try {
+            Client client = clientDto.parserToEntity();
+            client.setCity(city);
+            return clientRepository.save(client);
+        }catch (Exception e){
+            throw new ClientException("error save client");
+        }
+
     }
 
     @Override
@@ -44,9 +50,13 @@ public class ClientServiceImp implements  ClientService{
     }
 
     @Override
-    public Client updateNameById(UUID uuid, String name) throws ClientNotFoundException {
+    public Client updateNameById(UUID uuid, String name) throws ClientNotFoundException, ClientException {
         Client client = findById(uuid);
         client.setCompleteName(name);
-        return clientRepository.save(client);
+        try {
+            return clientRepository.save(client);
+        } catch (Exception e) {
+            throw new ClientException("error save client");
+        }
     }
 }

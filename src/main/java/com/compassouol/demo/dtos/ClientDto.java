@@ -3,6 +3,7 @@ package com.compassouol.demo.dtos;
 import com.compassouol.demo.entities.Client;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Min;
@@ -13,6 +14,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.UUID;
 
+@Setter
 @Getter
 public class ClientDto {
 
