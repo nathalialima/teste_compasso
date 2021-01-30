@@ -7,5 +7,5 @@ import java.util.List;
 import java.util.UUID;
 
 public interface ClientRepository  extends JpaRepository<Client, UUID> {
-    List<Client> findClientByCompleteNameLike(String name);
+    List<Client> findClientByCompleteNameContains(String name);
 }

@@ -34,7 +34,7 @@ public class ClientServiceImp implements  ClientService{
 
     @Override
     public List<Client> findByName(String name) {
-        return clientRepository.findClientByCompleteNameLike(name);
+        return clientRepository.findClientByCompleteNameContains(name);
     }
 
     @Override

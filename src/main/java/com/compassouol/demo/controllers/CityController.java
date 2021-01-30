@@ -1,6 +1,7 @@
 package com.compassouol.demo.controllers;
 
 import com.compassouol.demo.dtos.CityDto;
+import com.compassouol.demo.dtos.CityDtoSearch;
 import com.compassouol.demo.entities.City;
 import com.compassouol.demo.exceptions.CityException;
 import com.compassouol.demo.exceptions.CityNotFoundException;
@@ -31,14 +32,14 @@ public class CityController {
         return cityService.findById(uuid);
     }
 
-    @GetMapping("/name/{name}")
-    public List<City> getByCitiesName(@PathVariable("name") String name) throws CityNotFoundException {
-        return cityService.findByName(name);
+    @PostMapping("/name")
+    public List<City> getByCitiesName(@RequestBody CityDtoSearch cityDtoSearch) throws CityNotFoundException {
+        return cityService.findByName(cityDtoSearch.getName());
     }
 
-    @GetMapping("/state/{state}")
-    public List<City> getByCitiesState(@PathVariable("state") String state) throws CityNotFoundException {
-        return cityService.findByState(state);
+    @PostMapping("/state/{state}")
+    public List<City> getByCitiesState(@RequestBody CityDtoSearch cityDtoSearch) throws CityNotFoundException {
+        return cityService.findByState(cityDtoSearch.getState());
     }
 
 }
