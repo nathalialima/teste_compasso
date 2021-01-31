@@ -27,8 +27,8 @@ Criar Cidade
 
 ```json
 {
-  "name": "Teste",
-  "state": "Teste"
+  "name": "teste",
+  "state": "teste"
 }
 ```
 
