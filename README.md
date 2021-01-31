@@ -72,7 +72,7 @@ Buscar Cidade por Nome
 
 ```json
 {
-  "name": "Teste"
+  "name": "teste"
 }
 ```
 
@@ -104,7 +104,7 @@ Buscar Cidade por Estado
 
 ```json
 {
-  "state": "Teste"
+  "state": "teste"
 }
 ```
 
