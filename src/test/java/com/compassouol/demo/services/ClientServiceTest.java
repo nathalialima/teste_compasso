@@ -21,7 +21,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.mockito.Mockito.*;
-import static  org.springframework.test.util.AssertionErrors.*;
+import static org.springframework.test.util.AssertionErrors.assertEquals;
 
 public class ClientServiceTest {
     private final ClientRepository clientRepository = mock(ClientRepository.class);
@@ -34,10 +34,10 @@ public class ClientServiceTest {
     private City city;
 
     @BeforeEach
-    void init(){
+    void init() {
         LocalDate date = LocalDate.now();
-        city = new City("Teste","Teste");
-        client = new Client("teste","teste",date,1);
+        city = new City("Teste", "Teste");
+        client = new Client("teste", "teste", date, 1);
         client.setCity(city);
         client.setCompleteName("teste");
         client.setGender("teste");
@@ -53,7 +53,7 @@ public class ClientServiceTest {
 
     @SneakyThrows
     @Test
-    void create(){
+    void create() {
         UUID uuidCity = UUID.fromString("04fadd08-ba7d-4bd0-a8c4-2ce9608b9741");
         when(cityService.findById(uuidCity)).thenReturn(city);
         when(clientRepository.save(client)).thenReturn(client);
@@ -69,19 +69,20 @@ public class ClientServiceTest {
     void createClientCityNotFoundException() {
         UUID uuidCity = UUID.fromString("04fadd08-ba7d-4bd0-a8c4-2ce9608b9741");
         when(cityService.findById(uuidCity)).thenThrow(CityNotFoundException.class);
-        Assertions.assertThrows(CityNotFoundException.class, () ->clientService.create(clientDto));
+        Assertions.assertThrows(CityNotFoundException.class, () -> clientService.create(clientDto));
     }
+
     @Test
     void createClientException() throws CityNotFoundException {
         UUID uuidCity = UUID.fromString("04fadd08-ba7d-4bd0-a8c4-2ce9608b9741");
         when(cityService.findById(uuidCity)).thenReturn(city);
         when(clientRepository.save(client)).thenThrow(PersistenceException.class);
-        Assertions.assertThrows(ClientException.class, () ->clientService.create(clientDto));
+        Assertions.assertThrows(ClientException.class, () -> clientService.create(clientDto));
     }
 
     @SneakyThrows
     @Test
-    void findById(){
+    void findById() {
         UUID uuid = UUID.randomUUID();
         Optional<Client> clientOptionalTest = Optional.of(client);
         when(clientRepository.findById(uuid)).thenReturn(clientOptionalTest);
@@ -91,7 +92,7 @@ public class ClientServiceTest {
     }
 
     @Test
-    void findByName(){
+    void findByName() {
         String name = "teste";
         when(clientRepository.findClientByCompleteNameContains(name)).thenReturn(Collections.singletonList(client));
         List<Client> clients = clientService.findByName(name);
@@ -101,7 +102,7 @@ public class ClientServiceTest {
 
     @SneakyThrows
     @Test
-    void deleteById(){
+    void deleteById() {
         UUID uuid = UUID.randomUUID();
         Optional<Client> clientOptionalTest = Optional.of(client);
         when(clientRepository.findById(uuid)).thenReturn(clientOptionalTest);
@@ -110,14 +111,14 @@ public class ClientServiceTest {
     }
 
     @Test
-    void deleteByIdException(){
+    void deleteByIdException() {
         UUID uuid = UUID.randomUUID();
         Assertions.assertThrows(ClientNotFoundException.class, () -> clientService.deleteById(uuid));
     }
 
     @SneakyThrows
     @Test
-    void updateNameById(){
+    void updateNameById() {
         UUID uuid = UUID.randomUUID();
         Optional<Client> clientOptionalTest = Optional.of(client);
         String name = "Teste2";
@@ -131,14 +132,14 @@ public class ClientServiceTest {
     }
 
     @Test
-    void updateNameByIdClientNotFoundException(){
+    void updateNameByIdClientNotFoundException() {
         UUID uuid = UUID.randomUUID();
         String name = "Teste2";
         Assertions.assertThrows(ClientNotFoundException.class, () -> clientService.updateNameById(uuid, name));
     }
 
     @Test
-    void updateNameByIdClientException(){
+    void updateNameByIdClientException() {
         UUID uuid = UUID.randomUUID();
         Optional<Client> clientOptionalTest = Optional.of(client);
         String name = "Teste2";

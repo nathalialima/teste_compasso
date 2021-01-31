@@ -11,8 +11,12 @@ import java.util.UUID;
 
 public interface ClientService {
     Client create(ClientDto client) throws CityNotFoundException, ClientException;
+
     Client findById(UUID uuid) throws ClientNotFoundException;
+
     List<Client> findByName(String name);
+
     void deleteById(UUID uuid) throws ClientNotFoundException;
+
     Client updateNameById(UUID uuid, String name) throws ClientNotFoundException, ClientException;
 }

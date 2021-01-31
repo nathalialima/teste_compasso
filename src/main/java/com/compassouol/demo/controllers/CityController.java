@@ -37,7 +37,7 @@ public class CityController {
         return cityService.findByName(cityDtoSearch.getName());
     }
 
-    @PostMapping("/state/{state}")
+    @PostMapping("/state")
     public List<City> getByCitiesState(@RequestBody CityDtoSearch cityDtoSearch) throws CityNotFoundException {
         return cityService.findByState(cityDtoSearch.getState());
     }

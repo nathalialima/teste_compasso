@@ -10,6 +10,7 @@ import java.util.UUID;
 
 public interface CityService {
     City createCity(CityDto cityDto) throws CityException;
+
     City findById(UUID uuid) throws CityNotFoundException;
 
     List<City> findByName(String name);

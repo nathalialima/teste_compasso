@@ -15,19 +15,19 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class ClientServiceImp implements  ClientService{
+public class ClientServiceImp implements ClientService {
 
     private final ClientRepository clientRepository;
     private final CityService cityService;
 
     @Override
     public Client create(ClientDto clientDto) throws CityNotFoundException, ClientException {
-        City city =  cityService.findById(clientDto.getCityId());
+        City city = cityService.findById(clientDto.getCityId());
         try {
             Client client = clientDto.parserToEntity();
             client.setCity(city);
             return clientRepository.save(client);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new ClientException("error save client");
         }
 
@@ -35,7 +35,7 @@ public class ClientServiceImp implements  ClientService{
 
     @Override
     public Client findById(UUID uuid) throws ClientNotFoundException {
-        return clientRepository.findById(uuid).orElseThrow(()->new ClientNotFoundException(uuid));
+        return clientRepository.findById(uuid).orElseThrow(() -> new ClientNotFoundException(uuid));
     }
 
     @Override

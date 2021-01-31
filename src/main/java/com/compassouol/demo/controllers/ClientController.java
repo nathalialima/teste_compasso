@@ -33,17 +33,17 @@ public class ClientController {
     }
 
     @PostMapping("/name")
-    public List<Client> getByClientsName(@RequestBody ClientSearchDto clientSearchDto){
-        return  clientService.findByName(clientSearchDto.getName());
+    public List<Client> getByClientsName(@RequestBody ClientSearchDto clientSearchDto) {
+        return clientService.findByName(clientSearchDto.getName());
     }
 
     @DeleteMapping("/remove/{id}")
-    public void  removeClientById(@PathVariable("id") UUID uuid) throws ClientNotFoundException {
+    public void removeClientById(@PathVariable("id") UUID uuid) throws ClientNotFoundException {
         clientService.deleteById(uuid);
     }
 
     @PutMapping("/update/{id}")
-    public  Client updateClientNameById(@PathVariable("id") UUID uuid, @RequestBody ClientUpdateDto clientUpdateDto) throws ClientNotFoundException, ClientException {
+    public Client updateClientNameById(@PathVariable("id") UUID uuid, @RequestBody ClientUpdateDto clientUpdateDto) throws ClientNotFoundException, ClientException {
         return clientService.updateNameById(uuid, clientUpdateDto.getName());
     }
 }

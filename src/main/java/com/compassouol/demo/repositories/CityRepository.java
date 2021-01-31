@@ -8,5 +8,6 @@ import java.util.UUID;
 
 public interface CityRepository extends JpaRepository<City, UUID> {
     List<City> findCityByName(String name);
+
     List<City> findCityByState(String state);
 }

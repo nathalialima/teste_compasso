@@ -16,7 +16,7 @@ public class CityErrorAdvice {
     @ResponseBody
     @ExceptionHandler(CityException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    ApiErrorDto cityErrorAdviceHandle(CityException c){
+    ApiErrorDto cityErrorAdviceHandle(CityException c) {
         return ApiErrorDto.builder().status(HttpStatus.BAD_REQUEST).timestamp(LocalDateTime.now()).message(c.getMessage()).build();
     }
 

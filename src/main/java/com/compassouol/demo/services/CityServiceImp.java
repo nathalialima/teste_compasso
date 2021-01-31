@@ -13,21 +13,21 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class CityServiceImp implements CityService{
+public class CityServiceImp implements CityService {
 
     private final CityRepository cityRepository;
 
     public City createCity(CityDto cityDto) throws CityException {
         try {
             return cityRepository.save(cityDto.parserToEntity());
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new CityException("error save city");
         }
     }
 
     @Override
     public City findById(UUID uuid) throws CityNotFoundException {
-        return  cityRepository.findById(uuid).orElseThrow(()-> new CityNotFoundException(uuid));
+        return cityRepository.findById(uuid).orElseThrow(() -> new CityNotFoundException(uuid));
     }
 
     @Override

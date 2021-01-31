@@ -14,7 +14,7 @@ public class ClientNotFoundAdvice {
 
     @ExceptionHandler(ClientNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    ApiErrorDto clientNotFoundAdviceHandle(ClientNotFoundException c){
+    ApiErrorDto clientNotFoundAdviceHandle(ClientNotFoundException c) {
         return ApiErrorDto.builder().status(HttpStatus.NOT_FOUND).timestamp(LocalDateTime.now()).message(c.getMessage()).build();
     }
 }

@@ -8,7 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -39,7 +38,7 @@ public class Client {
     @OneToOne
     private City city;
 
-    public Client(String completeName, String gender, LocalDate bornDate, Integer age){
+    public Client(String completeName, String gender, LocalDate bornDate, Integer age) {
         this.completeName = completeName;
         this.gender = gender;
         this.bornDate = bornDate;
